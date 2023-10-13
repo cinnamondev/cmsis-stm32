@@ -1,0 +1,40 @@
+{
+    "configurations": [
+        {
+            "cwd": "${workspaceRoot}",
+            "executable": "${command:embedded-debug.getApplicationFile}",
+            "name": "Debug with OpenOCD",
+            "request": "launch",
+            "type": "cortex-debug",
+            "servertype": "openocd",
+            "configFiles": ["./openocd.cfg"],
+            "svdFile": "./STM32F401.svd",
+            "searchDir": [],
+            "runToEntryPoint": "main",
+            "postRestartCommands": [
+                "break main",
+                "continue"
+            ],
+            "showDevDebugOutput": "none",
+            "preLaunchTask": "environment-bootstrap"
+        },
+        {
+            "cwd": "${workspaceRoot}",
+            "executable": "${command:embedded-debug.getApplicationFile}",
+            "name": "Debug with OpenOCD attach",
+            "request": "attach",
+            "type": "cortex-debug",
+            "servertype": "openocd",
+            "svdFile": "./STM32F401.svd",
+            "configFiles": ["./openocd.cfg"],
+            "searchDir": [],
+            "runToEntryPoint": "main",
+            "postRestartCommands": [
+                "break main",
+                "continue"
+            ],
+            "showDevDebugOutput": "none",
+            "preLaunchTask": "environment-bootstrap"
+        }
+    ]
+}

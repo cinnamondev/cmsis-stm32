@@ -1,0 +1,8 @@
+solution:
+  compiler: AC6
+  target-types:
+    - type: Target_1
+      device: STM32F401RETx
+      optimize: none
+  projects:
+    - project: project.cproject.yaml

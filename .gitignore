@@ -30,3 +30,14 @@
 *.exe
 *.out
 *.app
+
+# CMSIS specific
+*.cbuild.yml
+*.cprj
+*.cbuild-idx.yml
+tmp/*
+out/*
+RTE/*
+
+# repo specific
+.clangd
