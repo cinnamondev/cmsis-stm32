@@ -1,22 +1,3 @@
-/**
-  ******************************************************************************
-  * @file    GPIO/GPIO_IOToggle/Src/main.c 
-  * @author  MCD Application Team
-  * @brief   This example describes how to configure and use GPIOs through 
-  *          the STM32F4xx HAL API.
-  ******************************************************************************
-  * @attention
-  *
-  * Copyright (c) 2017 STMicroelectronics.
-  * All rights reserved.
-  *
-  * This software is licensed under terms that can be found in the LICENSE file
-  * in the root directory of this software component.
-  * If no LICENSE file comes with this software, it is provided AS-IS.
-  *
-  ******************************************************************************
-  */
-
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "perf_counter.h"
@@ -46,8 +27,8 @@ void SysTick_Handler(void) {
 
 /**
   * @brief  Main program
-  * @param  None
-  * @retval None
+  *
+  * This program is to flash the *on board* LED.
   */
 int main(void)
 {
@@ -56,40 +37,32 @@ int main(void)
     in an infinite loop.
     To proceed, 3 steps are required: */
 
+  // System clock to full 84 Mhz
   SystemClock_Config();
   SystemCoreClockUpdate();
-  init_cycle_counter(true);
+  init_cycle_counter(false);  // Initialize perf_counter with new clk
 
-  /* STM32F4xx HAL library initialization:
-       - Configure the Flash prefetch, instruction and Data caches
-       - Configure the Systick to generate an interrupt each 1 msec
-       - Set NVIC Group Priority to 4
-       - Global MSP (MCU Support Package) initialization
-     */
+  // STM32CUBEF4 HAL initialize
   HAL_Init();
   
-  /* Configure the system clock to 84 MHz */
-  /* -1- Enable GPIOA Clock (to be able to program the configuration registers) */
+  // Port a clock
   __HAL_RCC_GPIOA_CLK_ENABLE();
-  
-  /* -2- Configure PA05 IO in output push-pull mode to
-         drive external LED */
+  // Push pull mode to drive on board LED
   GPIO_InitStruct.Pin = GPIO_PIN_5;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   GPIO_InitStruct.Speed = GPIO_SPEED_FAST;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct); 
 
-  /* -3- Toggle PA05 IO in an infinite loop */  
   while (1)
   {
     HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
-    
-    /* Insert delay 100 ms */
     delay_ms(1000);
   }
 }
 
+
+// SystemClock_Config provided by STM32CUBEF4 templates as part of the CMSIS package.
 /**
   * @brief  System Clock Configuration
   *         The system Clock is configured as follow : 

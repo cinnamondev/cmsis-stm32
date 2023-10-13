@@ -7,7 +7,7 @@ project:
     - pack: ARM::CMSIS@5.9.0
     - pack: GorgonMeducer::perf_counter@2.2.3
   setups:
-    - setup: Options for Target_1
+    - setup: Options for STM32F401RE
       processor:
         trustzone: non-secure
       debug: "on"
@@ -48,7 +48,7 @@ project:
             - --summary_stderr
             - --info summarysizes
   linker:
-    - script: test_Target_1.sct
+    - script: STM32F401RE.sct
   components:
     - component: Keil::Board Support&NUCLEO-F401RE:Buttons
     - component: Keil::Board Support&NUCLEO-F401RE:LED
